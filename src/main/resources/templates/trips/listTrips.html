@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>TripApp | Aplicación para publicar Ofertas de trips en El Salvador.</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/bootstrap/css/jumbotron.css" rel="stylesheet">
+    <link href="/bootstrap/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Fragmento de menú -->
+    <div th:replace="fragments/menu :: menu-principal"></div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <a class="btn btn-primary" th:href="@{/trips/create}" role="button">
+                    <i class="fas fa-file" aria-hidden="true"></i> Nueva
+                </a>
+                <hr>
+                <!-- Fragmento de mensaje -->
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Costo</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Operaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="trip : ${trips}">
+                            <th scope="row" th:text="${trip.id}"></th>
+                            <td th:text="${trip.nombre}"></td>
+                            <td th:text="${trip.descripcion}"></td>
+                            <td th:text="${trip.costo}"></td>
+                            <td th:text="${trip.categoria != null ? trip.categoria.nombre : 'Sin categoría'}"></td>
+                            <td>
+                                <a th:href="@{'/trips/edit/' + ${trip.id}}" class="btn btn-success btn-sm" role="button"
+                                    title="Editar">
+                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                </a>
+                                <a th:href="@{'/trips/delete/' + ${trip.id}}" onclick="return confirm('¿Estas seguro?')"
+                                    class="btn btn-danger btn-sm" role="button" title="Eliminar">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fragmento de footer -->
+    <div th:replace="fragments/footer :: pie-pagina"></div>
+
+    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script src="https://kit.fontawesome.com/4e8b1e6e6b.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

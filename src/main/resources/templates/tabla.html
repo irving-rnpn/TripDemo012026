@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trips</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+    <img th:src="@{/images/logo.png}" alt="Trips logo" width="136" height="136">
+    <h1>Trips en El Salvador</h1>
+    <table class="table table-striped table-hover">
+        <tr>
+            <td>Foto</td>
+            <td>id</td>
+            <td>Nombre</td>
+            <td>Descripcion</td>
+            <td>Fecha</td>
+            <td>Costo</td>
+            <td>Destacado</td>
+            <td>Clasificación</td>
+            <td>Detalles</td>
+            <td>Eliminar</td>
+        </tr>
+        <tr th:each="tempTrip : ${trips}">
+            <td><img th:src="@{/images/{img}(img=${tempTrip.imagen})}" alt="Trip Image" width="100" height="100"></td>
+            <td th:text="${tempTrip.id}"></td>
+            <td th:text="${tempTrip.nombre}"></td>
+            <td th:text="${tempTrip.descripcion}"></td>
+            <td th:text="${tempTrip.fecha}"></td>
+            <td th:text="${tempTrip.costo}"></td>
+            <td>
+                <span th:if="${tempTrip.destacado == 1}" class="badge bg-success">Sí</span>
+                <span th:if="${tempTrip.destacado == 0}" class="badge bg-danger">No</span>
+            </td>
+            <td>
+                <span th:if="${tempTrip.clasificacion < 6}" class="badge bg-danger"
+                    th:text="${tempTrip.clasificacion}"></span>
+                <span th:if="${tempTrip.clasificacion >= 6}" class="badge bg-success"
+                    th:text="${tempTrip.clasificacion}"></span>
+            </td>
+            <td>
+                <a th:href="@{'/trips/view/' + ${tempTrip.id}}" class="btn btn-primary">Detalles</a>
+            </td>
+            <td>
+                <a th:href="@{'/trips/delete/' + ${tempTrip.id}}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

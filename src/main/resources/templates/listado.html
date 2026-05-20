@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias Trips</title>
+</head>
+
+<body>
+    <h1>Trips en El Salvador</h1>
+    <ol>
+        <li th:each="tempTrip : ${listadoTrips}" th:text="${tempTrip}">Trip</li>
+        </li>
+    </ol>
+</body>
+
+</html>
